@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vacinas")  // Define a rota base
+@RequestMapping("/vacinas")
 public class VacinasController {
 
     @Autowired
     private VacinasService vacinasService;
 
-    @GetMapping // Define a rota específica para listar
+    @GetMapping
     public List<Vacinas> listarVacinas() {
         return vacinasService.getAll();
     }
