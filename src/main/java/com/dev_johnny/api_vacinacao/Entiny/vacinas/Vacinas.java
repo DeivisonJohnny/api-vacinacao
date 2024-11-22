@@ -1,4 +1,4 @@
-package com.dev_johnny.api_vacinacao.Entiny;
+package com.dev_johnny.api_vacinacao.Entiny.vacinas;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

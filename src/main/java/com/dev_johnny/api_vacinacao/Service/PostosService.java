@@ -1,6 +1,6 @@
 package com.dev_johnny.api_vacinacao.Service;
 
-import com.dev_johnny.api_vacinacao.Entiny.Postos;
+import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
 import com.dev_johnny.api_vacinacao.Repository.PostosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

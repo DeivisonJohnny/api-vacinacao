@@ -1,11 +1,12 @@
 package com.dev_johnny.api_vacinacao.Service;
 
-import com.dev_johnny.api_vacinacao.Entiny.PostoVacina;
-import com.dev_johnny.api_vacinacao.Repository.PostoVacinaRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.dev_johnny.api_vacinacao.Entiny.postovacina.PostoVacina;
+import com.dev_johnny.api_vacinacao.Repository.PostoVacinaRepository;
 
 @Service
 public class PostoVacinaService {
@@ -14,12 +15,12 @@ public class PostoVacinaService {
     private PostoVacinaRepository postoVacinaRepository;
 
     public List<PostoVacina> getVacinasByPosto(Integer postoId) {
-        return  postoVacinaRepository.findByPostoId(postoId);
+        return postoVacinaRepository.findByPostoId(postoId);
     }
 
     public List<PostoVacina> getAll() {
 
-            return postoVacinaRepository.findAllPostosVacinas();
+        return postoVacinaRepository.findAllPostosVacinas();
 
     }
 

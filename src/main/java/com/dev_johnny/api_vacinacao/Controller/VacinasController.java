@@ -1,6 +1,6 @@
 package com.dev_johnny.api_vacinacao.Controller;
 
-import com.dev_johnny.api_vacinacao.Entiny.Vacinas;
+import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
 import com.dev_johnny.api_vacinacao.Service.VacinasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

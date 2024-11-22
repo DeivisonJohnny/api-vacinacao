@@ -1,8 +1,8 @@
-package com.dev_johnny.api_vacinacao.Entiny;
-
-import jakarta.persistence.Embeddable;
+package com.dev_johnny.api_vacinacao.Entiny.postovacina;
 
 import java.io.Serializable;
+
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class PostoVacinaId implements Serializable {
@@ -30,12 +30,15 @@ public class PostoVacinaId implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         PostoVacinaId that = (PostoVacinaId) o;
 
-        if (!postoId.equals(that.postoId)) return false;
+        if (!postoId.equals(that.postoId))
+            return false;
         return vacinaId.equals(that.vacinaId);
     }
 

@@ -1,4 +1,4 @@
-package com.dev_johnny.api_vacinacao.Entiny;
+package com.dev_johnny.api_vacinacao.Entiny.postos;
 
 import jakarta.persistence.*;
 import lombok.Getter;
