@@ -22,17 +22,17 @@ public class PostoVacina implements Serializable {
 
     @EmbeddedId
     private PostoVacinaId id;
+
     @ManyToOne
     @MapsId("postoId")
-    @JoinColumn(name = "posto_id", referencedColumnName = "id")
+    @JoinColumn(name = "posto_id")
     private Postos posto;
 
     @ManyToOne
     @MapsId("vacinaId")
-    @JoinColumn(name = "vacina_id", referencedColumnName = "id")
+    @JoinColumn(name = "vacina_id")
     private Vacinas vacina;
 
-    @Column(name = "amount")
     private Integer amount;
 
 }

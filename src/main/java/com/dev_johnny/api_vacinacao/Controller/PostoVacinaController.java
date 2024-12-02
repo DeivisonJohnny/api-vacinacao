@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/postos-vacinas")
@@ -18,7 +19,7 @@ public class PostoVacinaController {
     private PostoVacinaService postoVacinaService;
 
     @GetMapping
-    public List<PostoVacina> getListAll() {
+    public List<Map<String, Object>> getListAll() {
         return postoVacinaService.getAll();
     }
 

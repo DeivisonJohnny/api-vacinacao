@@ -1,11 +1,11 @@
 package com.dev_johnny.api_vacinacao.Entiny.vacinas;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,5 +18,6 @@ public class Vacinas {
     private String name;
     private String description;
     private String tipo;
+
 
 }

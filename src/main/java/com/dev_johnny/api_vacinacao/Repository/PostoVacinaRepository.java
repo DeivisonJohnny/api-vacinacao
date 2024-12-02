@@ -13,10 +13,11 @@ import com.dev_johnny.api_vacinacao.Entiny.postovacina.PostoVacinaId;
 @Repository
 public interface PostoVacinaRepository extends JpaRepository<PostoVacina, PostoVacinaId> {
 
-    @Query(value = "SELECT * FROM postos_vacinas WHERE posto_id = :postoId", nativeQuery = true)
+    @Query("SELECT pv FROM PostoVacina pv WHERE pv.id.postoId = :postoId")
     List<PostoVacina> findByPostoId(@Param("postoId") Integer postoId);
 
-    @Query("SELECT pv FROM PostoVacina pv")
+
+    @Query("SELECT pv FROM PostoVacina pv " + "JOIN FETCH pv.posto p " + "JOIN FETCH pv.vacina v")
     List<PostoVacina> findAllPostosVacinas();
 
 }

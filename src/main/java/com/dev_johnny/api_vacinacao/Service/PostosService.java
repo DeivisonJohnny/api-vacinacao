@@ -17,4 +17,17 @@ public class PostosService {
         return postosRepository.findAll();
 
     }
+
+    public Postos putPostosService(Integer id, Postos posto) {
+        Postos postosEntiny = postosRepository.findById(id).orElseThrow(() -> new RuntimeException("Posto não encontrados"));
+
+        postosEntiny.setName(posto.getName());
+        postosEntiny.setEndereco(posto.getEndereco());
+        postosEntiny.setLatitude(posto.getLatitude());
+        postosEntiny.setLongitude(posto.getLongitude());
+
+
+        return postosRepository.save(postosEntiny);
+    }
+
 }
