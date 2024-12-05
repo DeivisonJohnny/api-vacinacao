@@ -2,7 +2,9 @@ package com.dev_johnny.api_vacinacao.Controller;
 
 import java.util.List;
 
+import com.dev_johnny.api_vacinacao.DTO.PostosDTO;
 import com.dev_johnny.api_vacinacao.DTO.RestResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,25 +19,29 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class PostosController {
 
     @Autowired
-    private JwtUtils jwtUtils; // Injeção da dependência JwtUtils
+    private JwtUtils jwtUtils;
 
     @Autowired
     PostosService postosService;
 
-    private Dotenv dotenv = Dotenv.load();
-
     @GetMapping
-    public Postos getListPostos() {
-        return (Postos) postosService.getAll();
+    public List<PostosDTO> getPostos() {
+        return postosService.getAll();
+    }
+
+    @PostMapping
+    public RestResponse create(@Valid @RequestBody PostosDTO posto) {
+        return postosService.create(posto);
     }
 
     @PutMapping("/{id}")
-    public RestResponse putPostosService(@PathVariable Integer id, @RequestBody Postos postos) {
-        System.out.println(id);
-        System.out.println(postos);
+    public RestResponse putPosto(@PathVariable Integer id, @RequestBody Postos postos) {
+        return postosService.putPostosService(id, postos);
+    }
 
-        postosService.putPostosService(id, postos);
-        return new RestResponse(200, "Posto Atualizado");
+    @DeleteMapping("/{id}")
+    public RestResponse deletePosto(@PathVariable Integer id) {
+        return postosService.deletePostos(id);
     }
 
 }

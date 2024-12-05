@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
 import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -26,6 +28,7 @@ public class PostoVacina implements Serializable {
     @ManyToOne
     @MapsId("postoId")
     @JoinColumn(name = "posto_id")
+    @JsonIgnore
     private Postos posto;
 
     @ManyToOne

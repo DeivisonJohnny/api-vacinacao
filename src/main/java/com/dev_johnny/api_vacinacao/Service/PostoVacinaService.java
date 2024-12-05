@@ -30,30 +30,26 @@ public class PostoVacinaService {
             Postos posto = pv.getPosto();
             Vacinas vacina = pv.getVacina();
 
-            // Inicializa o mapa do posto, se ainda não existir
             resultado.putIfAbsent(posto.getId(), new LinkedHashMap<>());
             Map<String, Object> postoMap = resultado.get(posto.getId());
 
-            // Adiciona informações do posto (ordem mantida)
             postoMap.putIfAbsent("id", posto.getId());
-            postoMap.putIfAbsent("nome", posto.getName());
+            postoMap.putIfAbsent("name", posto.getName());
             postoMap.putIfAbsent("endereco", posto.getEndereco());
             postoMap.putIfAbsent("latitude", posto.getLatitude());
             postoMap.putIfAbsent("longitude", posto.getLongitude());
             postoMap.putIfAbsent("vacinas", new LinkedHashMap<>());
 
-            // Adiciona informações da vacina no submapa
             Map<String, Object> vacinasMap = (Map<String, Object>) postoMap.get("vacinas");
             vacinasMap.put("vacina" + vacina.getId(), Map.of(
                     "id", vacina.getId(),
-                    "nome", vacina.getName(),
+                    "name", vacina.getName(),
                     "descricao", vacina.getDescription(),
                     "tipo", vacina.getTipo(),
                     "quantidade", pv.getAmount()
             ));
         }
 
-        // Converte o resultado em lista
         return new ArrayList<>(resultado.values());
     }
 

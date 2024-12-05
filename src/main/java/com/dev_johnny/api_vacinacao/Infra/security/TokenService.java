@@ -25,7 +25,7 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("DevJohnny")
                     .withSubject(usuarios.getUsername())
-                    .withExpiresAt(genExpirationDate()) // Passa um objeto Date
+                    .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
 
             return token;
