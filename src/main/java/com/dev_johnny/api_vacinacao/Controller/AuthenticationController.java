@@ -24,11 +24,11 @@ public class AuthenticationController {
     @Autowired
     private UsuariosRepository usuariosRepository;
 
-@Autowired
-private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-@Autowired
-private TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
@@ -37,7 +37,7 @@ private TokenService tokenService;
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-var token = tokenService.generateToken( (Usuarios) auth.getPrincipal());
+        var token = tokenService.generateToken( (Usuarios) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
 
@@ -55,9 +55,9 @@ var token = tokenService.generateToken( (Usuarios) auth.getPrincipal());
 
         Usuarios newUsuario = new Usuarios(data.name(), data.username(), encrypitedPassword, data.role());
 
-this.usuariosRepository.save(newUsuario);
+        this.usuariosRepository.save(newUsuario);
 
-return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 
 }

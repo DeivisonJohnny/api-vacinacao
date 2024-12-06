@@ -2,6 +2,9 @@ package com.dev_johnny.api_vacinacao.Service;
 
 import java.util.List;
 
+import com.dev_johnny.api_vacinacao.DTO.RestResponse;
+import com.dev_johnny.api_vacinacao.DTO.VacinaDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -21,9 +24,23 @@ public class VacinasService {
         return vacinasRepository.findAll();
     }
 
-    public List<String> getTables() {
-        String sql = "SHOW TABLES";
-        return jdbcTemplate.queryForList(sql, String.class);
+    public RestResponse createVaccines(@Valid VacinaDTO vacinas) {
+
+        Vacinas vacina = new Vacinas();
+        vacina.setName(vacinas.name());
+        vacina.setDescription(vacinas.description());
+        vacina.setTipo(vacinas.tipo());
+
+        System.out.println(vacina);
+
+        Vacinas savedVacina = vacinasRepository.save(vacina);
+
+        if(savedVacina == null) {
+            return new RestResponse(500, "Erro inesperado ao cadastrar vacina");
+        }
+
+        return new RestResponse(201, "Vacina criada com sucesso");
+
     }
 
 }

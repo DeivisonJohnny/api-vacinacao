@@ -25,7 +25,7 @@ public class PostosController {
     PostosService postosService;
 
     @GetMapping
-    public List<PostosDTO> getPostos() {
+    public List<PostosDTO> getAllPostos() {
         return postosService.getAll();
     }
 

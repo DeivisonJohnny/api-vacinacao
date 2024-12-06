@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
 import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
+import com.dev_johnny.api_vacinacao.Repository.PostosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,40 +18,46 @@ public class PostoVacinaService {
     @Autowired
     private PostoVacinaRepository postoVacinaRepository;
 
+
     public List<PostoVacina> getVacinasByPosto(Integer postoId) {
         return postoVacinaRepository.findByPostoId(postoId);
     }
 
     public List<Map<String, Object>> getAll() {
-        List<PostoVacina> postosVacinas = postoVacinaRepository.findAllPostosVacinas();
+        List<Postos> postos = postoVacinaRepository.findAllPostosComVacinas();
 
-        Map<Integer, Map<String, Object>> resultado = new LinkedHashMap<>();
+        List<Map<String, Object>> resultado = new ArrayList<>();
 
-        for (PostoVacina pv : postosVacinas) {
-            Postos posto = pv.getPosto();
-            Vacinas vacina = pv.getVacina();
+        for (Postos posto : postos) {
+            Map<String, Object> postoMap = new LinkedHashMap<>();
 
-            resultado.putIfAbsent(posto.getId(), new LinkedHashMap<>());
-            Map<String, Object> postoMap = resultado.get(posto.getId());
+            postoMap.put("id", posto.getId());
+            postoMap.put("name", posto.getName());
+            postoMap.put("endereco", posto.getEndereco());
+            postoMap.put("latitude", posto.getLatitude());
+            postoMap.put("longitude", posto.getLongitude());
 
-            postoMap.putIfAbsent("id", posto.getId());
-            postoMap.putIfAbsent("name", posto.getName());
-            postoMap.putIfAbsent("endereco", posto.getEndereco());
-            postoMap.putIfAbsent("latitude", posto.getLatitude());
-            postoMap.putIfAbsent("longitude", posto.getLongitude());
-            postoMap.putIfAbsent("vacinas", new LinkedHashMap<>());
+            List<Map<String, Object>> vacinasList = new ArrayList<>();
 
-            Map<String, Object> vacinasMap = (Map<String, Object>) postoMap.get("vacinas");
-            vacinasMap.put("vacina" + vacina.getId(), Map.of(
-                    "id", vacina.getId(),
-                    "name", vacina.getName(),
-                    "descricao", vacina.getDescription(),
-                    "tipo", vacina.getTipo(),
-                    "quantidade", pv.getAmount()
-            ));
+            if (posto.getVacinas() != null && !posto.getVacinas().isEmpty()) {
+                for (PostoVacina postoVacina : posto.getVacinas()) {
+                    Vacinas vacina = postoVacina.getVacina();
+                    Map<String, Object> vacinaMap = new LinkedHashMap<>();
+                    vacinaMap.put("id", vacina.getId());
+                    vacinaMap.put("name", vacina.getName());
+                    vacinaMap.put("descricao", vacina.getDescription());
+                    vacinaMap.put("tipo", vacina.getTipo());
+                    vacinaMap.put("quantidade", postoVacina.getAmount());
+
+                    vacinasList.add(vacinaMap);
+                }
+            }
+
+            postoMap.put("vacinas", vacinasList);
+
+            resultado.add(postoMap);
         }
 
-        return new ArrayList<>(resultado.values());
+        return resultado;
     }
-
 }

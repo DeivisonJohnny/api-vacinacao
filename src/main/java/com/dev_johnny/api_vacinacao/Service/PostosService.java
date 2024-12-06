@@ -57,6 +57,8 @@ public class PostosService {
             return new RestResponse(500, "Erro ao atualizar o posto");
         }
 
+        postosRepository.save(postosEntiny);
+
         return new RestResponse(201, "Posto Atualizado com Sucesso");
     }
 
