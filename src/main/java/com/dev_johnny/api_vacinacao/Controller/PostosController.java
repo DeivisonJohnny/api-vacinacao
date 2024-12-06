@@ -6,6 +6,7 @@ import com.dev_johnny.api_vacinacao.DTO.PostosDTO;
 import com.dev_johnny.api_vacinacao.DTO.RestResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
@@ -17,9 +18,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 @RestController
 @RequestMapping("/posto")
 public class PostosController {
-
-    @Autowired
-    private JwtUtils jwtUtils;
 
     @Autowired
     PostosService postosService;
@@ -36,12 +34,14 @@ public class PostosController {
 
     @PutMapping("/{id}")
     public RestResponse putPosto(@PathVariable Integer id, @RequestBody Postos postos) {
-        return postosService.putPostosService(id, postos);
+        return postosService.updatePosto(id, postos);
     }
 
     @DeleteMapping("/{id}")
-    public RestResponse deletePosto(@PathVariable Integer id) {
-        return postosService.deletePostos(id);
+    public ResponseEntity<Void> deletePosto(@PathVariable Integer id) {
+        postosService.deletePosto(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

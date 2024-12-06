@@ -36,16 +36,12 @@ public class PostosService {
         posto.setLatitude(postos.latitude());
         posto.setLongitude(postos.longitude());
 
-        Postos savedPosto = postosRepository.save(posto);
-
-        if(savedPosto == null) {
-            return new RestResponse(500, "Erro inesperado ao salvar o posto");
-        }
+        postosRepository.save(posto);
 
         return new RestResponse(201, "Posto criado com sucesso!");
     }
 
-    public RestResponse putPostosService(Integer id, Postos posto) {
+    public RestResponse updatePosto(Integer id, Postos posto) {
         Postos postosEntiny = postosRepository.findById(id).orElseThrow(() -> new RuntimeException("Posto não encontrados"));
 
         postosEntiny.setName(posto.getName());
@@ -53,22 +49,18 @@ public class PostosService {
         postosEntiny.setLatitude(posto.getLatitude());
         postosEntiny.setLongitude(posto.getLongitude());
 
-        if(!postosRepository.existsById(id)) {
-            return new RestResponse(500, "Erro ao atualizar o posto");
-        }
-
         postosRepository.save(postosEntiny);
 
         return new RestResponse(201, "Posto Atualizado com Sucesso");
     }
 
-    public RestResponse deletePostos(Integer id) {
+    public void deletePosto(Integer id) {
         if (!postosRepository.existsById(id)) {
             throw new EntityNotFoundException("Posto com ID " + id + " não encontrado");
         }
 
         postosRepository.deleteById(id);
-        return new RestResponse(204, "Posto excluído com sucesso");
+
     }
 
 }

@@ -34,7 +34,7 @@ public class VacinasService {
 
         System.out.println(vacina);
 
-        Vacinas savedVacina = vacinasRepository.save(vacina);
+        vacinasRepository.save(vacina);
 
         return new RestResponse(201, "Vacina criada com sucesso");
 
