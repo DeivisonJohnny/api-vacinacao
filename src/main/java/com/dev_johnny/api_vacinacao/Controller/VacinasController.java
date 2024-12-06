@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vacinas")
+@RequestMapping("/vacina")
 public class VacinasController {
 
     @Autowired
@@ -24,6 +24,11 @@ public class VacinasController {
     @PostMapping
     public RestResponse create(@RequestBody VacinaDTO vacina) {
         return vacinasService.createVaccines(vacina);
+    }
+
+    @PutMapping("/{id}")
+    public RestResponse update(@PathVariable Integer id, @RequestBody VacinaDTO vacina) {
+        return vacinasService.updateVaccines(id, vacina);
     }
 
 }

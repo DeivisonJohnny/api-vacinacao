@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dev_johnny.api_vacinacao.DTO.RestResponse;
 import com.dev_johnny.api_vacinacao.DTO.VacinaDTO;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,12 +36,20 @@ public class VacinasService {
 
         Vacinas savedVacina = vacinasRepository.save(vacina);
 
-        if(savedVacina == null) {
-            return new RestResponse(500, "Erro inesperado ao cadastrar vacina");
-        }
-
         return new RestResponse(201, "Vacina criada com sucesso");
 
+    }
+
+    public RestResponse updateVaccines(Integer id, @Valid VacinaDTO vacina) {
+        Vacinas vacinas = vacinasRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Vacina de id: " +id+ " não encontrada" ));
+
+        vacinas.setName(vacina.name());
+        vacinas.setDescription(vacina.description());
+        vacinas.setTipo(vacina.tipo());
+
+        vacinasRepository.save(vacinas);
+
+        return new RestResponse(201, "Vacina atualizada com sucesso");
     }
 
 }
