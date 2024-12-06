@@ -15,7 +15,7 @@ import com.dev_johnny.api_vacinacao.Utils.JwtUtils;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @RestController
-@RequestMapping("/postos")
+@RequestMapping("/posto")
 public class PostosController {
 
     @Autowired

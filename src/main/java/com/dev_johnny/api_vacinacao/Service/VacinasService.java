@@ -49,7 +49,12 @@ public class VacinasService {
 
         vacinasRepository.save(vacinas);
 
-        return new RestResponse(201, "Vacina atualizada com sucesso");
+        return new RestResponse(200, "Vacina atualizada com sucesso");
+    }
+
+    public void deleteVaccines(Integer id) {
+        Vacinas vacinas = vacinasRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Vacina de id: " +id+ " não encontrada" ));
+        vacinasRepository.deleteById(id);
     }
 
 }

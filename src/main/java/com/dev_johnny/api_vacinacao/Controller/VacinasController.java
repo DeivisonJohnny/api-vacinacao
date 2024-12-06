@@ -5,6 +5,7 @@ import com.dev_johnny.api_vacinacao.DTO.VacinaDTO;
 import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
 import com.dev_johnny.api_vacinacao.Service.VacinasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class VacinasController {
     @PutMapping("/{id}")
     public RestResponse update(@PathVariable Integer id, @RequestBody VacinaDTO vacina) {
         return vacinasService.updateVaccines(id, vacina);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        vacinasService.deleteVaccines(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
