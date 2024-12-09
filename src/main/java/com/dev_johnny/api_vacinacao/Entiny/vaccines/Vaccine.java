@@ -1,16 +1,15 @@
-package com.dev_johnny.api_vacinacao.Entiny.vacinas;
+package com.dev_johnny.api_vacinacao.Entiny.vaccines;
 
-import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
-public class Vacinas {
+
+@Table(name = "vacinas")
+public class Vaccine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

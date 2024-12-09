@@ -1,11 +1,9 @@
 package com.dev_johnny.api_vacinacao.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
-import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
-import com.dev_johnny.api_vacinacao.Repository.PostosRepository;
+import com.dev_johnny.api_vacinacao.Entiny.station.Station;
+import com.dev_johnny.api_vacinacao.Entiny.vaccines.Vaccine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +16,16 @@ public class PostoVacinaService {
     @Autowired
     private PostoVacinaRepository postoVacinaRepository;
 
-
     public List<PostoVacina> getVacinasByPosto(Integer postoId) {
         return postoVacinaRepository.findByPostoId(postoId);
     }
 
     public List<Map<String, Object>> getAll() {
-        List<Postos> postos = postoVacinaRepository.findAllPostosComVacinas();
+        List<Station> postos = postoVacinaRepository.findAllPostosComVacinas();
 
         List<Map<String, Object>> resultado = new ArrayList<>();
 
-        for (Postos posto : postos) {
+        for (Station posto : postos) {
             Map<String, Object> postoMap = new LinkedHashMap<>();
 
             postoMap.put("id", posto.getId());
@@ -41,7 +38,7 @@ public class PostoVacinaService {
 
             if (posto.getVacinas() != null && !posto.getVacinas().isEmpty()) {
                 for (PostoVacina postoVacina : posto.getVacinas()) {
-                    Vacinas vacina = postoVacina.getVacina();
+                    Vaccine vacina = postoVacina.getVacina();
                     Map<String, Object> vacinaMap = new LinkedHashMap<>();
                     vacinaMap.put("id", vacina.getId());
                     vacinaMap.put("name", vacina.getName());
@@ -57,7 +54,6 @@ public class PostoVacinaService {
 
             resultado.add(postoMap);
         }
-
         return resultado;
     }
 }

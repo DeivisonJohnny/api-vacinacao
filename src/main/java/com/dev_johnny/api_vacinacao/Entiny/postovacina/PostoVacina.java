@@ -2,11 +2,9 @@ package com.dev_johnny.api_vacinacao.Entiny.postovacina;
 
 import java.io.Serializable;
 
-import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
-import com.dev_johnny.api_vacinacao.Entiny.postos.Postos;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.dev_johnny.api_vacinacao.Entiny.vaccines.Vaccine;
+import com.dev_johnny.api_vacinacao.Entiny.station.Station;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -29,12 +27,12 @@ public class PostoVacina implements Serializable {
     @MapsId("postoId")
     @JoinColumn(name = "posto_id")
     @JsonIgnore
-    private Postos posto;
+    private Station posto;
 
     @ManyToOne
     @MapsId("vacinaId")
     @JoinColumn(name = "vacina_id")
-    private Vacinas vacina;
+    private Vaccine vacina;
 
     private Integer amount;
 

@@ -1,7 +1,6 @@
-package com.dev_johnny.api_vacinacao.Entiny.postos;
+package com.dev_johnny.api_vacinacao.Entiny.station;
 
 import com.dev_johnny.api_vacinacao.Entiny.postovacina.PostoVacina;
-import com.dev_johnny.api_vacinacao.Entiny.vacinas.Vacinas;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Postos {
+
+@Table(name = "postos")
+public class Station {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,6 @@ public class Postos {
     private String endereco;
     private String latitude;
     private String longitude;
-
 
     @OneToMany(mappedBy = "posto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostoVacina> vacinas;
