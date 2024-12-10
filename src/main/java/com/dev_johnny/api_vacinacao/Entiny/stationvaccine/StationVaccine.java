@@ -1,4 +1,4 @@
-package com.dev_johnny.api_vacinacao.Entiny.postovacina;
+package com.dev_johnny.api_vacinacao.Entiny.stationvaccine;
 
 import java.io.Serializable;
 
@@ -18,10 +18,10 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "postos_vacinas")
-public class PostoVacina implements Serializable {
+public class StationVaccine implements Serializable {
 
     @EmbeddedId
-    private PostoVacinaId id;
+    private StationVaccineId id;
 
     @ManyToOne
     @MapsId("postoId")
